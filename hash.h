@@ -21,8 +21,7 @@ struct MyStringHash {
     HASH_INDEX_T operator()(const std::string& k) const
     {
         // Add your code here
-        //fill a vector with number versions of letters in string
-
+        
         int start = 0; //variable unused for now, will be start of sixnum string
         int end = -1; //needs to be negative 1 because incrementing below and otherwise get one extra
 
