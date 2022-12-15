@@ -92,6 +92,39 @@ std::set<std::string> boggle(const std::set<std::string>& dict, const std::set<s
 bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>& prefix, const std::vector<std::vector<char> >& board, 
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
-//add your solution here!
+	//add your solution here!
+	//base case, if make it to end of either direction or no longer a word that is a prefix of another
+	if (r == board.size() || c == board.size() || prefix.find(word) == prefix.end())
+	{
+		//if the word is in the dictionary then we found a longest word
+		if (dict.find(word) != dict.end())
+		{
+			result.insert(word);
+			return true;
+		}
+		//else return false so can backtrack
+		else
+		{
+			return false;
+		}
+	}
 
+	//if get a true, then don't worry about anything as already inserted longest word, so check if false
+	if (!boggleHelper(dict, prefix, board, word + board[r][c], result, r + dr, c + dc, dr, dc))
+	{
+		//same as base case, where only add word if is in the dictionary otherwise return false so can backtrack
+		if (dict.find(word) != dict.end())
+		{
+			result.insert(word);
+			return true;
+		}
+		//return false because this backtrack did not yield a word we added to boggle
+		else
+		{
+			return false;
+		}
+	}
+
+	//return true because boggleHelper returned true so we just need to work that up the chain so no other words are added
+	return true;
 }
